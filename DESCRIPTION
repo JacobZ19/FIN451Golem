@@ -11,9 +11,15 @@ License: What license is it under?
 Imports: 
     config,
     golem,
-    shiny
+    shiny,
+    ggplot2,
+    dplyr,
+    tidyr,
+    lubridate,
+    bslib,
+    plotly
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.3
 Depends: 
     R (>= 3.5)

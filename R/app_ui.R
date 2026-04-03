@@ -3,14 +3,37 @@
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
 #' @import shiny
+#' @importFrom bslib page_navbar bs_theme nav_panel
+#' @import plotly
 #' @noRd
 app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    fluidPage(
-      golem::golem_welcome_page() # Remove this line to start building your UI
+    bslib::page_navbar(
+      title = "Commodity Forward Curve Analysis",
+      theme = bslib::bs_theme(bootswatch = "flatly"),
+      bslib::nav_panel(
+        title = "Historical Forward Curve",
+        mod_forward_curve_ui("forward_curve_1")
+      ),
+      bslib::nav_panel(
+        title = "Volatility Across Maturity",
+        mod_volatility_ui("volatility_1")
+      ),
+      bslib::nav_panel(
+        title = "Co-dynamics Across Markets",
+        mod_correlation_ui("correlation_1")
+      ),
+      bslib::nav_panel(
+        title = "Hedge Ratios",
+        mod_hedge_ratios_ui("hedge_ratios_1")
+      ),
+      bslib::nav_panel(
+        title = "Seasonal Impacts",
+        mod_seasonal_ui("seasonal_1")
+      )
     )
   )
 }
