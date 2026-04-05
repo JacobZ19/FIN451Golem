@@ -13,7 +13,10 @@ mod_hedge_ratios_ui <- function(id) {
     fluidPage(
       sidebarLayout(
         sidebarPanel(
-          selectInput(ns("hedge_instrument"), "Hedge Instrument (Futures)", choices = c("CL", "NG")),
+          selectInput(ns("hedge_instrument"), "Hedge Instrument (Commodity)", choices = c("CL", "NG")),
+          selectInput(ns("hedge_maturity"), "Hedge Maturity (Months)", 
+                      choices = sprintf("%02d", 1:36),
+                      selected = "01"),
           selectInput(ns("target_commodity"), "Target Commodity", choices = c("CL", "NG")),
           numericInput(ns("lookback"), "Lookback Period (Days)", value = 252, min = 30),
           hr(),
@@ -46,10 +49,10 @@ mod_hedge_ratios_server <- function(id) {
 
     # Reactive calculation of hedge statistics
     hedge_stats <- reactive({
-      req(input$hedge_instrument, input$target_commodity, input$lookback)
+      req(input$hedge_instrument, input$hedge_maturity, input$target_commodity, input$lookback)
       
-      # 1. Prepare Hedge Instrument (Prompt contract)
-      hedge_series <- paste0(input$hedge_instrument, "01")
+      # 1. Prepare Hedge Instrument
+      hedge_series <- paste0(input$hedge_instrument, input$hedge_maturity)
       h_data <- data %>%
         filter(series == hedge_series) %>%
         arrange(date) %>%

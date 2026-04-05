@@ -15,8 +15,16 @@ app_ui <- function(request) {
       title = "Commodity Forward Curve Analysis",
       theme = bslib::bs_theme(bootswatch = "flatly"),
       bslib::nav_panel(
+        title = "Price History",
+        mod_price_history_ui("price_history_1")
+      ),
+      bslib::nav_panel(
         title = "Historical Forward Curve",
         mod_forward_curve_ui("forward_curve_1")
+      ),
+      bslib::nav_panel(
+        title = "Yield Spreads",
+        mod_yield_spread_ui("yield_spread_1")
       ),
       bslib::nav_panel(
         title = "Volatility Across Maturity",

@@ -6,6 +6,8 @@
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
+  mod_yield_spread_server("yield_spread_1")
+  mod_price_history_server("price_history_1")
   mod_forward_curve_server("forward_curve_1")
   mod_volatility_server("volatility_1")
   mod_correlation_server("correlation_1")
