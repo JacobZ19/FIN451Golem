@@ -1,13 +1,12 @@
 Package: FIN451Golem
-Title: An Amazing Shiny App
+Title: Commodity Futures Curve Analysis
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "firstname",
-           family = "lastname",
-           role = c("aut", "cre"),
-           email = "your@email.com")
-Description: What the package does (one paragraph).
-License: What license is it under?
+    person(given = "Jacob",
+           family = "Zarowny",
+           email = "jzarowny@ualberta.ca")
+Description: This package generates a shiny app that can be used to compare the historical performance of Brent Crude (CL) and Natural Gas (NG) futures contracts.
+It also includes US Treasury Yields for further analysis.
 Imports: 
     config,
     golem,

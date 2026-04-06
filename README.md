@@ -1,0 +1,22 @@
+## App Pages
+
+-   Price History
+    -   Displays the historical prices or yields of the selected commodity or Treasury
+    -   Time to maturity can also be selected
+-   Historical Forward Curve
+    -   Displays the full forward curve for the selected commodity on a particular date
+    -   Displays Treasury yields on the same day
+-   Yield Spreads
+    -   Displays the spread between different Treasury maturities as the difference between annualized yields
+-   Volatility Across Maturity
+    -   Displays the volatility of each time to maturity of the selected commodity
+    -   Lookback period can also me adjusted
+-   Co-dynamics Across Markets
+    -   Displays a graph comparing the rolling returns of the two selected contracts
+    -   Displays a table containing other metrics such as correlation and relative beta
+-   Hedge Ratios
+    -   First tab computes the minimum variance hedge ratio for each length of contract using the selected hedge contract
+    -   Second tab displays the individual components of the the minimum variance calculation
+-   Seasonal Impacts
+    -   Displays an overlay of yearly price developments for the selected contract
+    -   Displays the average annualized volatility experienced by the selected contract in each calendar month
