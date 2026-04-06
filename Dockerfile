@@ -23,8 +23,8 @@ RUN R -e "install.packages(c('config', 'golem', 'shiny', 'ggplot2', 'dplyr', 'ti
 # Copy the FIN451Golem package source into the container
 COPY . /golem/app_source
 
-# Install the local FIN451Golem package from the source
-RUN R -e "remotes::install_local('/golem/app_source', upgrade = 'never')"
+# Clone from the repository
+RUN git clone https://github.com/JacobZ19/FIN451Golem.git
 
 # Document the Shiny port
 EXPOSE 3838
