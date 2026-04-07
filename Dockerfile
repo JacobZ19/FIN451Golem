@@ -3,7 +3,6 @@ FROM rocker/r-ver:4.3.0
 
 # Install system dependencies, including git for cloning
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
@@ -11,19 +10,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pandoc \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory
-WORKDIR /golem/work
-
-# Define the mandatory VOLUME for Golem Network data transfers
-VOLUME /golem/work
 
 # Install CRAN dependencies
-RUN R -e "install.packages(c('config', 'golem', 'shiny', 'ggplot2', 'dplyr', 'tidyr', 'lubridate', 'bslib', 'plotly', 'remotes'), repos='https://cloud.r-project.org/')"
+RUN Rscript -e "install.packages('remotes', repos = 'https://cloud.r-project.org')"
 
-# Clone the repository directly from GitHub and install it as a local package
-RUN git clone https://github.com/JacobZ19/FIN451Golem.git /golem/app_source 
+WORKDIR /app
 
-#Install Package 
+COPY DESCRIPTION NAMESPACE ./
+
+RUN Rscript -e "remotes::install_deps(dependencies = c('Imports', 'Depends'), upgrade = 'never')"
+
+COPY . .
+
 RUN R CMD INSTALL --no-multiarch --with-keep.source .
 
 # Document the Shiny port
