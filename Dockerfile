@@ -1,8 +1,9 @@
-# Use a stable R base image (x86_64) compatible with Golem Providers
+# Use a stable R base image (x86_64)
 FROM rocker/r-ver:4.3.0
 
-# Install system dependencies for R packages (required for plotly, bslib, and networking)
+# Install system dependencies, including git for cloning
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
     libcurl4-openssl-dev \
     libssl-dev \
     libxml2-dev \
@@ -10,21 +11,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pandoc \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory for the application
+# Set the working directory
 WORKDIR /golem/work
 
 # Define the mandatory VOLUME for Golem Network data transfers
 VOLUME /golem/work
 
 # Install CRAN dependencies
-# Using a specific repo to ensure reproducibility across any OS
 RUN R -e "install.packages(c('config', 'golem', 'shiny', 'ggplot2', 'dplyr', 'tidyr', 'lubridate', 'bslib', 'plotly', 'remotes'), repos='https://cloud.r-project.org/')"
 
-# Copy the FIN451Golem package source into the container
-COPY . /golem/app_source
-
-# Clone from the repository
-RUN git clone https://github.com/JacobZ19/FIN451Golem.git
+# Clone the repository directly from GitHub and install it as a local package
+RUN git clone https://github.com/JacobZ19/FIN451Golem.git /golem/app_source \
+    && R -e "remotes::install_local('/golem/app_source', upgrade = 'never')"
 
 # Document the Shiny port
 EXPOSE 3838

@@ -2,23 +2,23 @@ Package: FIN451Golem
 Title: Commodity Futures Curve Analysis
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Jacob",
-           family = "Zarowny",
-           email = "jzarowny@ualberta.ca")
-Description: This package generates a shiny app that can be used to compare the historical performance of Brent Crude (CL) and Natural Gas (NG) futures contracts.
-It also includes US Treasury Yields for further analysis.
+    person("Jacob", "Zarowny", , "jzarowny@ualberta.ca")
+Description: This package generates a shiny app that can be used to
+    compare the historical performance of Brent Crude (CL) and Natural Gas
+    (NG) futures contracts. It also includes US Treasury Yields for
+    further analysis.
+Depends: 
+    R (>= 3.5)
 Imports: 
-    config,
-    golem,
-    shiny,
-    ggplot2,
-    dplyr,
-    tidyr,
-    lubridate,
     bslib,
-    plotly
+    config,
+    dplyr,
+    ggplot2,
+    golem,
+    lubridate,
+    plotly,
+    shiny,
+    tidyr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.3
-Depends: 
-    R (>= 3.5)
