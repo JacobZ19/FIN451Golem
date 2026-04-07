@@ -21,8 +21,10 @@ VOLUME /golem/work
 RUN R -e "install.packages(c('config', 'golem', 'shiny', 'ggplot2', 'dplyr', 'tidyr', 'lubridate', 'bslib', 'plotly', 'remotes'), repos='https://cloud.r-project.org/')"
 
 # Clone the repository directly from GitHub and install it as a local package
-RUN git clone https://github.com/JacobZ19/FIN451Golem.git /golem/app_source \
-    && R -e "remotes::install_local('/golem/app_source', upgrade = 'never')"
+RUN git clone https://github.com/JacobZ19/FIN451Golem.git /golem/app_source 
+
+#Install Package 
+RUN R CMD INSTALL --no-multiarch --with-keep.source .
 
 # Document the Shiny port
 EXPOSE 3838
